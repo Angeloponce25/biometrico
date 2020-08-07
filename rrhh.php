@@ -6,6 +6,11 @@ $sql = "SELECT * FROM estado ORDER BY id ASC";
         $query = $pdo->prepare($sql);
         $query->execute();
         $list = $query->fetchAll();        
+
+$ejecutar = "SELECT * FROM asistencias ORDER BY id ASC";
+        $ejecutar = $pdo->prepare($ejecutar);
+        $ejecutar->execute();
+        $tabla_excel = $ejecutar->fetchAll();        
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,13 +33,7 @@ $sql = "SELECT * FROM estado ORDER BY id ASC";
     </head>
     <body id="page-top">
         <nav style="background-color: #1a252f !important;" class="navbar navbar-expand-lg bg-secondary fixed-top" id="mainNav">
-            <div class="container"><a class="navbar-brand js-scroll-trigger" href="#page-top">Sistema Asistencia</a>
-                <button class="navbar-toggler navbar-toggler-right font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">Menu <i class="fas fa-bars"></i></button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto">
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#" ><a></li>                                                
-                    </ul>
-                </div>                
+            <div class="container"><a class="navbar-brand js-scroll-trigger" href="#page-top">Sistema Asistencia</a>               
             </div>            
         </nav>
         <header style="background-color: #2c3e50 !important;" class="masthead bg-primary text-white text-center">
@@ -48,7 +47,7 @@ $sql = "SELECT * FROM estado ORDER BY id ASC";
         <!-- Portfolio Modal-->       
         <section style="background-color: #2c3e50 !important;" class="page-section bg-primary text-white mb-0" id="about">
             <div class="container">
-                <!-- About Section Heading-->
+                <!-- About Section Heading-->                
                 <div class="text-center">
                     <h2 class="page-section-heading d-inline-block text-white">ESTADO ACTUAL </h2>
                     <h2><?php foreach ($list as $rs) {echo $rs['estado'];}?> </h2>
@@ -57,10 +56,15 @@ $sql = "SELECT * FROM estado ORDER BY id ASC";
                 <div class="divider-custom divider-light">
                     <div class="divider-custom-line"></div>
                 </div>
-                            <div class="text-center">           
-                                <div class="col-sm-12">
-                                    <input type="button" class="btn btn-primary" value="ACTUALIZAR SERVIDOR" onclick="encender_server()">
-                                </div>
+                            <div class="text-center">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <input type="button" class="btn btn-primary" value="ACTUALIZAR SERVIDOR" onclick="encender_server()">
+                                    </div>
+                                    <div class="col-6">
+                                        <a href="excel.php" class="btn btn-primary">DESCARGAR EXCEL</a>
+                                    </div>
+                                </div>                                        
                             </div>
          <div class="panel panel-default">
        <div class="panel-body">
@@ -68,8 +72,7 @@ $sql = "SELECT * FROM estado ORDER BY id ASC";
          <div id="list_container">         
          </div>
         </center>
-         <!-- lista_contenedor --> 
-       </div>
+       </div>       
      </div>
             </div>
         </section>
